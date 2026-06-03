@@ -72,30 +72,30 @@ export default function MenuPage() {
     <PageReveal>
       <main ref={pageRef} className="section-pad bg-[#1a0f0a] pb-[clamp(4.5rem,8vw,7rem)] pt-32">
         <section className="container-fluid">
-          <div className="cream-panel grid gap-8 overflow-hidden lg:grid-cols-[1fr_0.72fr]">
+          <div className="lb-card grid gap-8 overflow-hidden border-[#f5e6d0]/14 bg-[#24140d] lg:grid-cols-[1fr_0.72fr]">
             <div className="p-[clamp(1.5rem,4vw,4rem)]">
               <p className="mb-5 text-xs font-black uppercase tracking-[0.24em] text-[#c17f3a]">
                 Local Bistro cafe menu
               </p>
-              <h1 className="menu-hero-title font-display max-w-4xl text-[clamp(3.7rem,9vw,9rem)] leading-[0.84]">
+              <h1 className="menu-hero-title font-display max-w-4xl text-[clamp(3.25rem,8vw,8rem)] leading-[0.86] text-[#f5e6d0]">
                 Coffee for the table, not the cart.
               </h1>
-              <p className="menu-intro-item mt-6 max-w-2xl text-[clamp(1rem,1.35vw,1.2rem)] leading-8 text-[#1a0f0a]/70">
+              <p className="menu-intro-item mt-6 max-w-2xl text-[clamp(1rem,1.35vw,1.2rem)] leading-8 text-[#f5e6d0]/70">
                 This is the in-cafe menu for the physical Local Bistro counter. Prices are for dine-in and takeaway drinks, with regular and large sizes where available.
               </p>
             </div>
-            <div className="grid border-t border-[#1a0f0a]/10 lg:border-l lg:border-t-0">
+            <div className="grid border-t border-[#f5e6d0]/10 bg-[#120b08]/56 lg:border-l lg:border-t-0">
               {menuHighlights.map((item) => (
-                <div key={item.label} className="menu-intro-item flex items-center justify-between gap-5 border-b border-[#1a0f0a]/10 px-6 py-5 last:border-b-0">
+                <div key={item.label} className="menu-intro-item flex items-center justify-between gap-5 border-b border-[#f5e6d0]/10 px-6 py-5 last:border-b-0">
                   <div className="flex items-center gap-4">
-                    <span className="grid h-11 w-11 place-items-center border border-[#1a0f0a]/14 text-[#c17f3a]">
+                    <span className="grid h-11 w-11 place-items-center border border-[#f5e6d0]/14 text-[#c17f3a]">
                       <item.icon size={19} />
                     </span>
-                    <span className="text-sm font-black uppercase tracking-[0.18em] text-[#1a0f0a]/54">
+                    <span className="text-sm font-black uppercase tracking-[0.18em] text-[#f5e6d0]/54">
                       {item.label}
                     </span>
                   </div>
-                  <span className="font-display text-2xl text-[#1a0f0a]">{item.value}</span>
+                  <span className="font-display text-2xl text-[#f5e6d0]">{item.value}</span>
                 </div>
               ))}
             </div>
@@ -118,7 +118,7 @@ export default function MenuPage() {
                     <p className="mb-2 text-xs font-black uppercase tracking-[0.2em] text-[#c17f3a]">
                       {section.note}
                     </p>
-                    <h2 className="font-display text-[clamp(2.35rem,4vw,4.25rem)] leading-[0.9]">
+                    <h2 className="font-display whitespace-nowrap text-[clamp(2.05rem,3vw,3.6rem)] leading-[0.9]">
                       {section.title}
                     </h2>
                   </div>
