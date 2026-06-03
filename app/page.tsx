@@ -28,7 +28,11 @@ export default function Home() {
     const ctx = gsap.context(() => {
       const heroTitle = page.querySelector(".hero-title");
       if (heroTitle) {
-        const split = new SplitText(heroTitle, { type: "chars", charsClass: "split-char" });
+        const split = new SplitText(heroTitle, {
+          type: "words,chars",
+          wordsClass: "split-word",
+          charsClass: "split-char",
+        });
         gsap.from(split.chars, {
           yPercent: 105,
           opacity: 0,
@@ -216,7 +220,7 @@ export default function Home() {
               <p className="hero-later mb-5 text-xs font-black uppercase tracking-[0.28em] text-[#c17f3a]">
                 Single origin. Slow brewed. Locally loved.
               </p>
-              <h1 className="hero-title font-display overflow-hidden text-[clamp(4rem,13vw,12rem)] leading-[0.83] tracking-normal">
+              <h1 className="hero-title font-display max-w-[12ch] overflow-hidden text-[clamp(3.8rem,12vw,11rem)] leading-[0.86] tracking-normal">
                 Coffee that feels like home.
               </h1>
               <p className="hero-later mt-8 max-w-2xl text-[clamp(1rem,1.5vw,1.35rem)] leading-8 text-[#f5e6d0]/78">
@@ -389,13 +393,11 @@ export default function Home() {
             <h2 className="split-heading font-display mb-10 max-w-4xl text-[clamp(3rem,7vw,7rem)] leading-[0.9]">
               Seen around the bistro.
             </h2>
-            <div className="vibe-grid grid auto-rows-[minmax(14rem,28vw)] grid-cols-2 gap-4 md:grid-cols-4">
+            <div className="vibe-grid grid grid-cols-2 gap-4 md:grid-cols-3">
               {vibeImages.map((image, index) => (
                 <div
                   key={image}
-                  className={`vibe-tile relative overflow-hidden ${
-                    index === 0 || index === 5 ? "md:row-span-2" : ""
-                  } ${index === 2 ? "md:col-span-2" : ""}`}
+                  className="vibe-tile relative aspect-[4/5] overflow-hidden"
                 >
                   <Image src={image} alt="Local Bistro atmosphere" fill className="object-cover" sizes="50vw" />
                 </div>

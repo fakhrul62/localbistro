@@ -26,7 +26,9 @@ body {
   background: var(--espresso);
   color: var(--cream);
   font-family: var(--font-dm-sans), Arial, sans-serif;
+  overflow-wrap: normal;
   overflow-x: hidden;
+  word-break: normal;
 }
 
 button,
@@ -80,8 +82,18 @@ img {
 }
 
 .split-line,
+.split-word,
 .split-char {
   display: inline-block;
+}
+
+.split-word {
+  white-space: nowrap;
+}
+
+.hero-title {
+  text-wrap: balance;
+  white-space: normal;
 }
 
 .cream-panel {
