@@ -1,10 +1,17 @@
 "use client";
 
-import { Coffee, CupSoda, Sparkles } from "lucide-react";
+import { Coffee, CupSoda, Leaf, Sparkles } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { PageReveal } from "@/components/page-reveal";
 import { cafeMenuSections } from "@/data/cafe-menu";
 import { gsap, ScrollTrigger, SplitText } from "@/lib/gsap";
+
+const menuHighlights = [
+  { icon: Coffee, label: "Pulled fresh", value: "espresso" },
+  { icon: CupSoda, label: "Served chilled", value: "cold cups" },
+  { icon: Leaf, label: "Rotating beans", value: "single origin" },
+  { icon: Sparkles, label: "Made seasonal", value: "comfort lattes" },
+];
 
 export default function MenuPage() {
   const pageRef = useRef<HTMLElement>(null);
@@ -14,48 +21,46 @@ export default function MenuPage() {
     if (!page) return;
 
     const ctx = gsap.context(() => {
-      const hero = page.querySelector(".chalk-hero-title");
+      const hero = page.querySelector(".menu-hero-title");
       if (hero) {
         const split = new SplitText(hero, {
-          type: "words,chars",
-          wordsClass: "split-word",
-          charsClass: "split-char",
+          type: "lines",
+          linesClass: "split-line",
         });
-        gsap.from(split.chars, {
-          y: 22,
+        gsap.from(split.lines, {
+          yPercent: 100,
           opacity: 0,
-          rotate: "random(-8, 8)",
-          stagger: 0.012,
-          duration: 0.7,
-          ease: "power3.out",
+          stagger: 0.08,
+          duration: 0.85,
+          ease: "power4.out",
         });
       }
 
-      gsap.from(".chalk-mark", {
-        scaleX: 0,
-        transformOrigin: "left center",
+      gsap.from(".menu-intro-item", {
+        y: 24,
+        opacity: 0,
         stagger: 0.08,
-        duration: 0.9,
+        duration: 0.7,
         ease: "power3.out",
       });
 
-      ScrollTrigger.batch(".menu-board-section", {
-        start: "top 82%",
+      ScrollTrigger.batch(".menu-section-card", {
+        start: "top 84%",
         onEnter: (batch) =>
           gsap.fromTo(
             batch,
-            { y: 38, opacity: 0, rotate: -0.5 },
-            { y: 0, opacity: 1, rotate: 0, stagger: 0.1, duration: 0.8, ease: "power3.out" },
+            { y: 36, opacity: 0 },
+            { y: 0, opacity: 1, stagger: 0.09, duration: 0.75, ease: "power3.out" },
           ),
       });
 
-      ScrollTrigger.batch(".chalk-row", {
-        start: "top 90%",
+      ScrollTrigger.batch(".menu-row", {
+        start: "top 92%",
         onEnter: (batch) =>
           gsap.fromTo(
             batch,
-            { x: -16, opacity: 0 },
-            { x: 0, opacity: 1, stagger: 0.035, duration: 0.45, ease: "power2.out" },
+            { y: 12, opacity: 0 },
+            { y: 0, opacity: 1, stagger: 0.03, duration: 0.45, ease: "power2.out" },
           ),
       });
     }, page);
@@ -65,100 +70,103 @@ export default function MenuPage() {
 
   return (
     <PageReveal>
-      <main ref={pageRef} className="section-pad bg-[#100906] pb-[clamp(4rem,7vw,6rem)] pt-28">
+      <main ref={pageRef} className="section-pad bg-[#1a0f0a] pb-[clamp(4.5rem,8vw,7rem)] pt-32">
         <section className="container-fluid">
-          <div className="mb-8 grid gap-5 lg:grid-cols-[1fr_auto] lg:items-end">
-            <div>
-              <p className="chalk-caramel mb-3 text-xs font-black uppercase tracking-[0.24em]">
-                Local Bistro cafe board
+          <div className="cream-panel grid gap-8 overflow-hidden lg:grid-cols-[1fr_0.72fr]">
+            <div className="p-[clamp(1.5rem,4vw,4rem)]">
+              <p className="mb-5 text-xs font-black uppercase tracking-[0.24em] text-[#c17f3a]">
+                Local Bistro cafe menu
               </p>
-              <h1 className="chalk-hero-title font-chalk chalk-text text-[clamp(3.4rem,9vw,7.4rem)] leading-[0.8]">
-                Today&apos;s Menu
+              <h1 className="menu-hero-title font-display max-w-4xl text-[clamp(3.7rem,9vw,9rem)] leading-[0.84]">
+                Coffee for the table, not the cart.
               </h1>
+              <p className="menu-intro-item mt-6 max-w-2xl text-[clamp(1rem,1.35vw,1.2rem)] leading-8 text-[#1a0f0a]/70">
+                This is the in-cafe menu for the physical Local Bistro counter. Prices are for dine-in and takeaway drinks, with regular and large sizes where available.
+              </p>
             </div>
-            <div className="chalkboard relative overflow-hidden border-[0.65rem] border-[#5a321d] px-5 py-4 lg:min-w-[22rem]">
-              <div className="relative grid gap-1">
-                <p className="font-chalk chalk-sage text-[clamp(1.6rem,2.6vw,2.25rem)] leading-none">
-                  Regular / Large
-                </p>
-                <p className="chalk-text text-xs uppercase tracking-[0.18em] opacity-70">
-                  dine in only menu
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="mb-6 grid gap-3 md:grid-cols-3">
-            {[
-              { icon: Coffee, label: "small batch espresso" },
-              { icon: CupSoda, label: "slow cold brews" },
-              { icon: Sparkles, label: "seasonal cups" },
-            ].map((item) => (
-              <div key={item.label} className="chalk-mark chalkboard relative overflow-hidden border-[0.5rem] border-[#5a321d] px-4 py-3">
-                <div className="relative flex items-center gap-3">
-                  <item.icon className="text-[#c17f3a]" size={20} />
-                  <span className="font-chalk chalk-text text-[clamp(1.65rem,3vw,2.25rem)] leading-none">{item.label}</span>
+            <div className="grid border-t border-[#1a0f0a]/10 lg:border-l lg:border-t-0">
+              {menuHighlights.map((item) => (
+                <div key={item.label} className="menu-intro-item flex items-center justify-between gap-5 border-b border-[#1a0f0a]/10 px-6 py-5 last:border-b-0">
+                  <div className="flex items-center gap-4">
+                    <span className="grid h-11 w-11 place-items-center border border-[#1a0f0a]/14 text-[#c17f3a]">
+                      <item.icon size={19} />
+                    </span>
+                    <span className="text-sm font-black uppercase tracking-[0.18em] text-[#1a0f0a]/54">
+                      {item.label}
+                    </span>
+                  </div>
+                  <span className="font-display text-2xl text-[#1a0f0a]">{item.value}</span>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
 
-          <div className="grid gap-4 lg:grid-cols-2 xl:grid-cols-3">
+          <div className="mt-5 flex flex-col gap-3 border border-[#f5e6d0]/12 bg-[#24140d] px-5 py-4 text-[#f5e6d0]/72 md:flex-row md:items-center md:justify-between">
+            <p className="text-sm leading-6">
+              Menu items are prepared at the cafe counter and are not sold online.
+            </p>
+            <p className="text-xs font-black uppercase tracking-[0.2em] text-[#c17f3a]">
+              Open daily 7am-8pm
+            </p>
+          </div>
+
+          <div className="mt-8 grid gap-5 lg:grid-cols-2">
             {cafeMenuSections.map((section) => (
-              <section key={section.title} className="menu-board-section chalkboard relative overflow-hidden border-[0.65rem] border-[#5a321d] p-[clamp(0.9rem,1.8vw,1.25rem)]">
-                <div className="relative">
-                  <div className="mb-4 flex flex-col gap-1 border-b border-[#f5e6d0]/18 pb-3 sm:flex-row sm:items-end sm:justify-between">
+              <section key={section.title} className="menu-section-card lb-card overflow-hidden">
+                <div className="flex flex-col gap-4 border-b border-[#f5e6d0]/12 bg-[#120b08] p-5 sm:flex-row sm:items-end sm:justify-between">
+                  <div>
+                    <p className="mb-2 text-xs font-black uppercase tracking-[0.2em] text-[#c17f3a]">
+                      {section.note}
+                    </p>
+                    <h2 className="font-display text-[clamp(2.35rem,4vw,4.25rem)] leading-[0.9]">
+                      {section.title}
+                    </h2>
+                  </div>
+                  <div className="grid min-w-[8.5rem] grid-cols-2 gap-2 text-center text-[0.65rem] font-black uppercase tracking-[0.16em] text-[#f5e6d0]/54">
+                    <span>Regular</span>
+                    <span>Large</span>
+                  </div>
+                </div>
+
+                <div className="grid">
+                  {section.items.map((item) => (
+                    <article key={item.name} className="menu-row grid gap-4 border-b border-[#f5e6d0]/10 p-5 last:border-b-0 sm:grid-cols-[1fr_auto] sm:items-center">
                       <div>
-                        <h2 className="font-chalk chalk-caramel text-[clamp(2.2rem,4vw,3.15rem)] leading-[0.8]">
-                          {section.title}
-                        </h2>
-                        <p className="chalk-text mt-1 text-[0.65rem] uppercase tracking-[0.14em] opacity-58">
-                          {section.note}
+                        <div className="flex flex-wrap items-center gap-3">
+                          <h3 className="font-display text-[clamp(1.45rem,2.3vw,2rem)] leading-none">
+                            {item.name}
+                          </h3>
+                          {item.badge ? (
+                            <span className="bg-[#89916e]/20 px-2.5 py-1 text-[0.6rem] font-black uppercase tracking-[0.14em] text-[#c9d5a8]">
+                              {item.badge}
+                            </span>
+                          ) : null}
+                        </div>
+                        <p className="mt-2 text-sm leading-6 text-[#f5e6d0]/62">
+                          {item.description}
                         </p>
                       </div>
-                      <p className="chalk-sage text-[0.65rem] font-black uppercase tracking-[0.16em]">
-                        reg / lg
-                      </p>
-                  </div>
-
-                  <div className="grid gap-3">
-                    {section.items.map((item) => (
-                      <article key={item.name} className="chalk-row grid gap-2 sm:grid-cols-[1fr_auto] sm:items-start">
-                        <div>
-                          <div className="flex flex-wrap items-baseline gap-2">
-                            <h3 className="font-chalk chalk-text text-[clamp(1.65rem,3vw,2.2rem)] leading-[0.84]">
-                              {item.name}
-                            </h3>
-                            {item.badge ? (
-                              <span className="chalk-sage text-[0.6rem] font-black uppercase tracking-[0.16em]">
-                                {item.badge}
-                              </span>
-                            ) : null}
-                          </div>
-                          <p className="chalk-text mt-0.5 text-[0.82rem] leading-5 opacity-65">
-                            {item.description}
-                          </p>
-                        </div>
-                        <div className="font-chalk chalk-text flex min-w-[5.8rem] items-baseline justify-between gap-3 text-[clamp(1.45rem,2.6vw,2rem)] leading-none sm:justify-end">
-                          <span>{item.regular}</span>
-                          {item.large ? <span className="chalk-caramel">{item.large}</span> : <span className="opacity-35">--</span>}
-                        </div>
-                      </article>
-                    ))}
-                  </div>
+                      <div className="grid min-w-[8.5rem] grid-cols-2 gap-2 text-center">
+                        <span className="bg-[#f5e6d0] px-3 py-2 text-sm font-black text-[#1a0f0a]">
+                          {item.regular}
+                        </span>
+                        <span className="bg-[#c17f3a] px-3 py-2 text-sm font-black text-[#1a0f0a]">
+                          {item.large || "-"}
+                        </span>
+                      </div>
+                    </article>
+                  ))}
                 </div>
               </section>
             ))}
           </div>
 
-          <div className="chalkboard relative mt-5 overflow-hidden border-[0.55rem] border-[#5a321d] px-5 py-4">
-            <div className="relative flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-              <p className="font-chalk chalk-text text-[clamp(1.8rem,3.4vw,2.7rem)] leading-none">
-                Ask your barista about today&apos;s rotating bean.
-              </p>
-              <p className="chalk-caramel text-xs font-black uppercase tracking-[0.2em]">
-                Open daily 7am-8pm
-              </p>
+          <div className="mt-8 grid gap-5 md:grid-cols-[1fr_auto] md:items-center">
+            <p className="font-display max-w-3xl text-[clamp(2.3rem,5vw,5rem)] leading-[0.92]">
+              Ask your barista about today&apos;s rotating bean.
+            </p>
+            <div className="border border-[#f5e6d0]/14 px-5 py-4 text-sm leading-6 text-[#f5e6d0]/68">
+              Freshly pulled, quietly served, made for a real table.
             </div>
           </div>
         </section>
