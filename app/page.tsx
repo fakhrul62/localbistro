@@ -136,7 +136,7 @@ export default function Home() {
 
         gsap.to(menuTrack, {
           x: () => {
-            const distance = menuTrack.scrollWidth - window.innerWidth + window.innerWidth * 0.12;
+            const distance = menuTrack.scrollWidth - window.innerWidth - window.innerWidth * 0.08;
             return -Math.max(distance, 0);
           },
           ease: "none",
@@ -317,13 +317,13 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="menu" className="menu-horizontal noise relative h-[260vh] overflow-clip bg-[#120b08]">
-          <div className="menu-stage sticky top-0 flex min-h-screen flex-col justify-center overflow-hidden py-[clamp(5rem,8vw,7rem)]">
-            <div className="section-pad mb-10">
+        <section id="menu" className="menu-horizontal noise relative h-[240vh] overflow-clip bg-[#120b08]">
+          <div className="menu-stage sticky top-0 flex h-screen flex-col justify-center overflow-hidden py-[clamp(4.5rem,7vh,6rem)]">
+            <div className="section-pad mb-[clamp(1.5rem,4vh,3rem)]">
               <p className="mb-4 text-xs font-black uppercase tracking-[0.24em] text-[#c17f3a]">
                 The menu taste
               </p>
-              <h2 className="split-heading font-display max-w-5xl text-[clamp(3rem,7vw,7rem)] leading-[0.9]">
+              <h2 className="split-heading font-display max-w-5xl text-[clamp(2.5rem,6vw,5.8rem)] leading-[0.9]">
                 Six cups, one slow scroll.
               </h2>
             </div>
@@ -331,20 +331,28 @@ export default function Home() {
               {menuItems.map((item, index) => (
                 <article
                   key={item.name}
-                  className="menu-card lb-card grid w-[min(82vw,30rem)] shrink-0 overflow-hidden md:w-[min(42vw,30rem)]"
+                  className="menu-card lb-card grid h-[min(56vh,31rem)] w-[min(84vw,24rem)] shrink-0 overflow-hidden md:h-[min(38vh,21rem)] md:w-[min(72vw,43rem)] md:grid-cols-[0.95fr_1fr]"
                 >
-                  <div className="relative aspect-[1.12] overflow-hidden">
-                    <Image src={item.image} alt={item.name} fill className="object-cover" sizes="80vw" />
+                  <div className="relative min-h-0 overflow-hidden">
+                    <Image
+                      src={item.image}
+                      alt={item.name}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 84vw, 34vw"
+                    />
                   </div>
-                  <div className="p-6">
-                    <div className="mb-8 flex items-center justify-between text-xs font-black uppercase tracking-[0.18em] text-[#c17f3a]">
+                  <div className="flex min-h-0 flex-col justify-between p-[clamp(1.1rem,2.4vw,1.75rem)]">
+                    <div className="mb-4 flex items-center justify-between text-xs font-black uppercase tracking-[0.18em] text-[#c17f3a]">
                       <span>0{index + 1}</span>
                       <span>{item.price}</span>
                     </div>
-                    <h3 className="font-display text-[clamp(2rem,4vw,3.4rem)] leading-[0.9]">
-                      {item.name}
-                    </h3>
-                    <p className="mt-4 text-sm leading-6 text-[#f5e6d0]/68">{item.description}</p>
+                    <div>
+                      <h3 className="font-display text-[clamp(1.8rem,3.2vw,3.1rem)] leading-[0.9]">
+                        {item.name}
+                      </h3>
+                      <p className="mt-4 text-sm leading-6 text-[#f5e6d0]/68">{item.description}</p>
+                    </div>
                   </div>
                 </article>
               ))}
