@@ -65,96 +65,100 @@ export default function MenuPage() {
 
   return (
     <PageReveal>
-      <main ref={pageRef} className="section-pad bg-[#100906] pb-[clamp(5rem,9vw,8rem)] pt-32">
+      <main ref={pageRef} className="section-pad bg-[#100906] pb-[clamp(4rem,7vw,6rem)] pt-28">
         <section className="container-fluid">
-          <div className="chalkboard relative overflow-hidden border-[clamp(0.75rem,2vw,1.25rem)] border-[#5a321d] p-[clamp(1rem,4vw,3rem)]">
-            <div className="relative">
-              <div className="mb-10 flex flex-col gap-5 border-b border-dashed border-[#f5e6d0]/26 pb-8 md:flex-row md:items-end md:justify-between">
-                <div>
-                  <p className="chalk-caramel mb-3 text-xs font-black uppercase tracking-[0.24em]">
-                    Local Bistro cafe board
-                  </p>
-                  <h1 className="chalk-hero-title font-chalk chalk-text text-[clamp(4.2rem,12vw,11rem)] leading-[0.78]">
-                    Today&apos;s Menu
-                  </h1>
-                </div>
-                <div className="grid gap-2 text-left md:text-right">
-                  <p className="font-chalk chalk-sage text-[clamp(1.8rem,3vw,2.8rem)] leading-none">
-                    Regular / Large
-                  </p>
-                  <p className="chalk-text text-sm uppercase tracking-[0.18em] opacity-70">
-                    dine in only menu
-                  </p>
+          <div className="mb-8 grid gap-5 lg:grid-cols-[1fr_auto] lg:items-end">
+            <div>
+              <p className="chalk-caramel mb-3 text-xs font-black uppercase tracking-[0.24em]">
+                Local Bistro cafe board
+              </p>
+              <h1 className="chalk-hero-title font-chalk chalk-text text-[clamp(3.4rem,9vw,7.4rem)] leading-[0.8]">
+                Today&apos;s Menu
+              </h1>
+            </div>
+            <div className="chalkboard relative overflow-hidden border-[0.65rem] border-[#5a321d] px-5 py-4 lg:min-w-[22rem]">
+              <div className="relative grid gap-1">
+                <p className="font-chalk chalk-sage text-[clamp(1.6rem,2.6vw,2.25rem)] leading-none">
+                  Regular / Large
+                </p>
+                <p className="chalk-text text-xs uppercase tracking-[0.18em] opacity-70">
+                  dine in only menu
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="mb-6 grid gap-3 md:grid-cols-3">
+            {[
+              { icon: Coffee, label: "small batch espresso" },
+              { icon: CupSoda, label: "slow cold brews" },
+              { icon: Sparkles, label: "seasonal cups" },
+            ].map((item) => (
+              <div key={item.label} className="chalk-mark chalkboard relative overflow-hidden border-[0.5rem] border-[#5a321d] px-4 py-3">
+                <div className="relative flex items-center gap-3">
+                  <item.icon className="text-[#c17f3a]" size={20} />
+                  <span className="font-chalk chalk-text text-[clamp(1.65rem,3vw,2.25rem)] leading-none">{item.label}</span>
                 </div>
               </div>
+            ))}
+          </div>
 
-              <div className="mb-10 grid gap-4 md:grid-cols-3">
-                {[
-                  { icon: Coffee, label: "small batch espresso" },
-                  { icon: CupSoda, label: "slow cold brews" },
-                  { icon: Sparkles, label: "seasonal cups" },
-                ].map((item) => (
-                  <div key={item.label} className="chalk-mark flex items-center gap-3 border-y border-[#f5e6d0]/18 py-3">
-                    <item.icon className="text-[#c17f3a]" size={22} />
-                    <span className="font-chalk chalk-text text-3xl leading-none">{item.label}</span>
-                  </div>
-                ))}
-              </div>
-
-              <div className="grid gap-6 lg:grid-cols-2">
-                {cafeMenuSections.map((section) => (
-                  <section key={section.title} className="menu-board-section border border-dashed border-[#f5e6d0]/22 p-[clamp(1rem,2.4vw,1.5rem)]">
-                    <div className="mb-5 flex flex-col gap-1 border-b border-[#f5e6d0]/18 pb-4 sm:flex-row sm:items-end sm:justify-between">
+          <div className="grid gap-4 lg:grid-cols-2 xl:grid-cols-3">
+            {cafeMenuSections.map((section) => (
+              <section key={section.title} className="menu-board-section chalkboard relative overflow-hidden border-[0.65rem] border-[#5a321d] p-[clamp(0.9rem,1.8vw,1.25rem)]">
+                <div className="relative">
+                  <div className="mb-4 flex flex-col gap-1 border-b border-[#f5e6d0]/18 pb-3 sm:flex-row sm:items-end sm:justify-between">
                       <div>
-                        <h2 className="font-chalk chalk-caramel text-[clamp(2.8rem,5vw,4.6rem)] leading-[0.8]">
+                        <h2 className="font-chalk chalk-caramel text-[clamp(2.2rem,4vw,3.15rem)] leading-[0.8]">
                           {section.title}
                         </h2>
-                        <p className="chalk-text mt-2 text-xs uppercase tracking-[0.16em] opacity-58">
+                        <p className="chalk-text mt-1 text-[0.65rem] uppercase tracking-[0.14em] opacity-58">
                           {section.note}
                         </p>
                       </div>
-                      <p className="chalk-sage text-xs font-black uppercase tracking-[0.18em]">
+                      <p className="chalk-sage text-[0.65rem] font-black uppercase tracking-[0.16em]">
                         reg / lg
                       </p>
-                    </div>
+                  </div>
 
-                    <div className="grid gap-4">
-                      {section.items.map((item) => (
-                        <article key={item.name} className="chalk-row grid gap-3 sm:grid-cols-[1fr_auto] sm:items-start">
-                          <div>
-                            <div className="flex flex-wrap items-baseline gap-3">
-                              <h3 className="font-chalk chalk-text text-[clamp(2rem,4vw,3rem)] leading-[0.82]">
-                                {item.name}
-                              </h3>
-                              {item.badge ? (
-                                <span className="chalk-sage text-xs font-black uppercase tracking-[0.18em]">
-                                  {item.badge}
-                                </span>
-                              ) : null}
-                            </div>
-                            <p className="chalk-text mt-1 text-sm leading-6 opacity-65">
-                              {item.description}
-                            </p>
+                  <div className="grid gap-3">
+                    {section.items.map((item) => (
+                      <article key={item.name} className="chalk-row grid gap-2 sm:grid-cols-[1fr_auto] sm:items-start">
+                        <div>
+                          <div className="flex flex-wrap items-baseline gap-2">
+                            <h3 className="font-chalk chalk-text text-[clamp(1.65rem,3vw,2.2rem)] leading-[0.84]">
+                              {item.name}
+                            </h3>
+                            {item.badge ? (
+                              <span className="chalk-sage text-[0.6rem] font-black uppercase tracking-[0.16em]">
+                                {item.badge}
+                              </span>
+                            ) : null}
                           </div>
-                          <div className="font-chalk chalk-text flex min-w-[7rem] items-baseline justify-between gap-4 text-[clamp(1.8rem,3vw,2.6rem)] leading-none sm:justify-end">
-                            <span>{item.regular}</span>
-                            {item.large ? <span className="chalk-caramel">{item.large}</span> : <span className="opacity-35">--</span>}
-                          </div>
-                        </article>
-                      ))}
-                    </div>
-                  </section>
-                ))}
-              </div>
+                          <p className="chalk-text mt-0.5 text-[0.82rem] leading-5 opacity-65">
+                            {item.description}
+                          </p>
+                        </div>
+                        <div className="font-chalk chalk-text flex min-w-[5.8rem] items-baseline justify-between gap-3 text-[clamp(1.45rem,2.6vw,2rem)] leading-none sm:justify-end">
+                          <span>{item.regular}</span>
+                          {item.large ? <span className="chalk-caramel">{item.large}</span> : <span className="opacity-35">--</span>}
+                        </div>
+                      </article>
+                    ))}
+                  </div>
+                </div>
+              </section>
+            ))}
+          </div>
 
-              <div className="mt-10 flex flex-col gap-4 border-t border-dashed border-[#f5e6d0]/24 pt-7 md:flex-row md:items-center md:justify-between">
-                <p className="font-chalk chalk-text text-[clamp(2rem,4vw,3.5rem)] leading-none">
-                  Ask your barista about today&apos;s rotating bean.
-                </p>
-                <p className="chalk-caramel text-xs font-black uppercase tracking-[0.2em]">
-                  Open daily 7am-8pm
-                </p>
-              </div>
+          <div className="chalkboard relative mt-5 overflow-hidden border-[0.55rem] border-[#5a321d] px-5 py-4">
+            <div className="relative flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+              <p className="font-chalk chalk-text text-[clamp(1.8rem,3.4vw,2.7rem)] leading-none">
+                Ask your barista about today&apos;s rotating bean.
+              </p>
+              <p className="chalk-caramel text-xs font-black uppercase tracking-[0.2em]">
+                Open daily 7am-8pm
+              </p>
             </div>
           </div>
         </section>
