@@ -19,9 +19,7 @@ export async function POST(request: Request) {
     const paymentIntent = await getStripe().paymentIntents.create({
       amount: amountInCents,
       currency: "usd",
-      automatic_payment_methods: {
-        enabled: true,
-      },
+      payment_method_types: ["card"],
       metadata: {
         source: "local-bistro",
         item_count: String(orderItems.length),
