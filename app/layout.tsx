@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Sans, Playfair_Display } from "next/font/google";
+import { Caveat, DM_Sans, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { CustomCursor } from "@/components/custom-cursor";
 import { Footer } from "@/components/footer";
@@ -19,6 +19,12 @@ const playfair = Playfair_Display({
   display: "swap",
 });
 
+const caveat = Caveat({
+  subsets: ["latin"],
+  variable: "--font-caveat",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "Local Bistro | Artisan Coffee and Slow Culture",
   description:
@@ -32,7 +38,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${dmSans.variable} ${playfair.variable}`}>
+      <body className={`${dmSans.variable} ${playfair.variable} ${caveat.variable}`}>
         <SmoothScroll />
         <RouteLoader />
         <CustomCursor />

@@ -72,6 +72,7 @@ export function Footer() {
             </p>
             <div className="grid gap-3 text-sm text-[#f5e6d0]/72">
               <Link href="/">Story</Link>
+              <Link href="/menu">Cafe Menu</Link>
               <Link href="/shop">Shop</Link>
               <Link href="/cart">Cart</Link>
             </div>

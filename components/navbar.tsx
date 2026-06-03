@@ -61,6 +61,7 @@ export function Navbar() {
         </LoadingLink>
         <div className="hidden items-center gap-8 text-xs font-bold uppercase tracking-[0.18em] text-[#f5e6d0]/78 md:flex">
           <LoadingLink href="/">Home</LoadingLink>
+          <LoadingLink href="/menu">Menu</LoadingLink>
           <LoadingLink href="/shop">Shop</LoadingLink>
           <LoadingLink href="/cart">Cart</LoadingLink>
         </div>
