@@ -7,6 +7,7 @@ import { featuredProducts, menuItems } from "@/data/products";
 import { LoadingLink } from "@/components/loading-link";
 import { PageReveal } from "@/components/page-reveal";
 import { ProductCard } from "@/components/product-card";
+import { GalleryLightbox } from "@/components/gallery-lightbox";
 import { gsap, ScrollTrigger, SplitText } from "@/lib/gsap";
 
 const vibeImages = [
@@ -393,16 +394,7 @@ export default function Home() {
             <h2 className="split-heading font-display mb-10 max-w-4xl text-[clamp(3rem,7vw,7rem)] leading-[0.9]">
               Seen around the bistro.
             </h2>
-            <div className="vibe-grid grid grid-cols-2 gap-4 md:grid-cols-3">
-              {vibeImages.map((image, index) => (
-                <div
-                  key={image}
-                  className="vibe-tile relative aspect-[4/5] overflow-hidden"
-                >
-                  <Image src={image} alt="Local Bistro atmosphere" fill className="object-cover" sizes="50vw" />
-                </div>
-              ))}
-            </div>
+            <GalleryLightbox images={vibeImages} altText="Local Bistro atmosphere" />
           </div>
         </section>
 

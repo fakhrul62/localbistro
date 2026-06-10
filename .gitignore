@@ -11,4 +11,6 @@ pnpm-debug.log*
 .DS_Store
 dev-server.log
 dev-server.err.log
+dev-server-current.log
+dev-server-current.err.log
 .vercel
