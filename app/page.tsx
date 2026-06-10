@@ -1,13 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowDown, ArrowRight, Coffee, Leaf, PackageCheck, Sparkles } from "lucide-react";
+import { ArrowDown, ArrowRight, CalendarDays, Coffee, Gift, Leaf, MapPin, PackageCheck, Sparkles, Star, Users } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { featuredProducts, menuItems } from "@/data/products";
 import { LoadingLink } from "@/components/loading-link";
 import { PageReveal } from "@/components/page-reveal";
 import { ProductCard } from "@/components/product-card";
 import { GalleryLightbox } from "@/components/gallery-lightbox";
+import { cafeInfo, events, reviews, seasonalSpecials } from "@/data/cafe-extras";
 import { gsap, ScrollTrigger, SplitText } from "@/lib/gsap";
 
 const vibeImages = [
@@ -389,12 +390,138 @@ export default function Home() {
           </div>
         </section>
 
+        <section className="section-pad bg-[#24140d] py-[clamp(5rem,10vw,8rem)]">
+          <div className="container-fluid grid gap-8 lg:grid-cols-[0.95fr_1fr] lg:items-end">
+            <div>
+              <p className="mb-4 text-xs font-black uppercase tracking-[0.24em] text-[#c17f3a]">
+                Visit and pickup
+              </p>
+              <h2 className="split-heading font-display max-w-4xl text-[clamp(3rem,7vw,7rem)] leading-[0.9]">
+                Built for the neighborhood first.
+              </h2>
+            </div>
+            <div className="grid gap-5 sm:grid-cols-2">
+              <article className="lb-card p-6">
+                <MapPin className="mb-10 text-[#c17f3a]" size={28} />
+                <h3 className="font-display text-4xl leading-none">Come by the counter.</h3>
+                <p className="mt-5 text-sm leading-7 text-[#f5e6d0]/68">
+                  {cafeInfo.address}. Open daily for dine-in, takeaway, beans, and pastry.
+                </p>
+                <LoadingLink href="/visit" className="btn-primary mt-7">
+                  Plan a Visit
+                </LoadingLink>
+              </article>
+              <article className="lb-card p-6">
+                <Coffee className="mb-10 text-[#c17f3a]" size={28} />
+                <h3 className="font-display text-4xl leading-none">Order ahead for pickup.</h3>
+                <p className="mt-5 text-sm leading-7 text-[#f5e6d0]/68">
+                  Request drinks, pastries, or beans before you arrive. The cafe confirms timing.
+                </p>
+                <LoadingLink href="/order-ahead" className="btn-primary mt-7">
+                  Start Pickup
+                </LoadingLink>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section className="section-pad cream-panel py-[clamp(5rem,10vw,8rem)]">
+          <div className="container-fluid">
+            <div className="mb-10 flex flex-col justify-between gap-5 md:flex-row md:items-end">
+              <div>
+                <p className="mb-4 text-xs font-black uppercase tracking-[0.24em] text-[#c17f3a]">
+                  Seasonal specials
+                </p>
+                <h2 className="split-heading font-display max-w-4xl text-[clamp(3rem,7vw,7rem)] leading-[0.9]">
+                  New cups keep the room alive.
+                </h2>
+              </div>
+              <LoadingLink href="/menu" className="btn-primary w-fit">
+                Full Menu
+              </LoadingLink>
+            </div>
+            <div className="grid gap-5 md:grid-cols-3">
+              {seasonalSpecials.map((item) => (
+                <article key={item.name} className="border border-[#1a0f0a]/12 p-6">
+                  <p className="text-xs font-black uppercase tracking-[0.2em] text-[#c17f3a]">
+                    {item.tag} / {item.price}
+                  </p>
+                  <h3 className="font-display mt-5 text-[clamp(2.2rem,4vw,4rem)] leading-[0.92]">
+                    {item.name}
+                  </h3>
+                  <p className="mt-5 text-sm leading-7 text-[#1a0f0a]/68">{item.description}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="section-pad bg-[#1a0f0a] py-[clamp(5rem,10vw,8rem)]">
+          <div className="container-fluid grid gap-5 lg:grid-cols-3">
+            {[
+              {
+                icon: CalendarDays,
+                title: "Events",
+                text: events[0].description,
+                href: "/events",
+                cta: "See Events",
+              },
+              {
+                icon: Users,
+                title: "Reservations",
+                text: "Save a seat for birthdays, work tables, tasting sessions, or weekend visits.",
+                href: "/bookings",
+                cta: "Book a Table",
+              },
+              {
+                icon: Gift,
+                title: "Gifts and loyalty",
+                text: "Join Brew Club, send a gift card, or set up recurring beans for home.",
+                href: "/loyalty",
+                cta: "Join Brew Club",
+              },
+            ].map((item) => (
+              <article key={item.title} className="lb-card p-6">
+                <item.icon className="mb-10 text-[#c17f3a]" size={28} />
+                <h3 className="font-display text-[clamp(2.4rem,4vw,4rem)] leading-[0.9]">
+                  {item.title}
+                </h3>
+                <p className="mt-5 text-sm leading-7 text-[#f5e6d0]/68">{item.text}</p>
+                <LoadingLink href={item.href} className="btn-secondary mt-8">
+                  {item.cta}
+                </LoadingLink>
+              </article>
+            ))}
+          </div>
+        </section>
+
         <section className="section-pad bg-[#1a0f0a] py-[clamp(5rem,10vw,9rem)]">
           <div className="container-fluid">
             <h2 className="split-heading font-display mb-10 max-w-4xl text-[clamp(3rem,7vw,7rem)] leading-[0.9]">
               Seen around the bistro.
             </h2>
             <GalleryLightbox images={vibeImages} altText="Local Bistro atmosphere" />
+          </div>
+        </section>
+
+        <section className="section-pad cream-panel py-[clamp(5rem,10vw,8rem)]">
+          <div className="container-fluid">
+            <div className="mb-10 flex items-end justify-between gap-5">
+              <h2 className="font-display max-w-4xl text-[clamp(3rem,7vw,7rem)] leading-[0.9]">
+                Local love, real cups.
+              </h2>
+              <Star className="hidden text-[#c17f3a] md:block" size={44} />
+            </div>
+            <div className="grid gap-5 md:grid-cols-3">
+              {reviews.map((review) => (
+                <article key={review.name} className="border border-[#1a0f0a]/12 p-6">
+                  <p className="text-lg leading-8 text-[#1a0f0a]/72">&quot;{review.quote}&quot;</p>
+                  <p className="mt-8 text-xs font-black uppercase tracking-[0.2em] text-[#c17f3a]">
+                    {review.name}
+                  </p>
+                </article>
+              ))}
+            </div>
           </div>
         </section>
 

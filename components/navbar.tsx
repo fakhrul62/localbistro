@@ -59,11 +59,13 @@ export function Navbar() {
         <LoadingLink href="/" className="text-[#f5e6d0]">
           <Logo />
         </LoadingLink>
-        <div className="hidden items-center gap-8 text-xs font-bold uppercase tracking-[0.18em] text-[#f5e6d0]/78 md:flex">
+        <div className="hidden items-center gap-6 text-xs font-bold uppercase tracking-[0.16em] text-[#f5e6d0]/78 md:flex">
           <LoadingLink href="/">Home</LoadingLink>
+          <LoadingLink href="/visit">Visit</LoadingLink>
           <LoadingLink href="/menu">Menu</LoadingLink>
+          <LoadingLink href="/order-ahead">Order</LoadingLink>
           <LoadingLink href="/shop">Shop</LoadingLink>
-          <LoadingLink href="/cart">Cart</LoadingLink>
+          <LoadingLink href="/events">Events</LoadingLink>
         </div>
         <LoadingLink href="/cart" className="icon-button relative" aria-label="Open cart" data-cart-target>
           <ShoppingBag size={18} />

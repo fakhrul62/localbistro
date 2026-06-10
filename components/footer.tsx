@@ -71,10 +71,13 @@ export function Footer() {
               Menu
             </p>
             <div className="grid gap-3 text-sm text-[#f5e6d0]/72">
-              <Link href="/">Story</Link>
+              <Link href="/visit">Visit Us</Link>
               <Link href="/menu">Cafe Menu</Link>
+              <Link href="/order-ahead">Order Ahead</Link>
               <Link href="/shop">Shop</Link>
-              <Link href="/cart">Cart</Link>
+              <Link href="/loyalty">Brew Club</Link>
+              <Link href="/gift-cards">Gift Cards</Link>
+              <Link href="/coffee-guide">Brew Guide</Link>
             </div>
           </div>
           <div className="footer-item">
